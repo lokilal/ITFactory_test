@@ -11,16 +11,15 @@ class WorkerSerializer(serializers.ModelSerializer):
 
 
 class SalesPointSerializer(serializers.ModelSerializer):
-    worker = serializers.PrimaryKeyRelatedField(
-        queryset=Worker.objects.all()
-    )
 
     class Meta:
         model = SalesPoint
-        fields = '__all__'
+        fields = ('id', 'title', )
 
+"""
     def to_representation(self, instance):
         data = super(SalesPointSerializer, self).to_representation(instance)
         obj = Worker.objects.get(pk=data['worker'])
         data['worker'] = WorkerSerializer(obj).data
         return data
+"""

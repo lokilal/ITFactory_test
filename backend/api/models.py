@@ -6,7 +6,8 @@ class Worker(models.Model):
         max_length=255, verbose_name='Имя'
     )
     phone_number = models.CharField(
-        max_length=255, verbose_name='Номер телефона'
+        max_length=255, verbose_name='Номер телефона',
+        unique=True
     )
 
     def __str__(self):
@@ -18,7 +19,8 @@ class SalesPoint(models.Model):
         max_length=255, verbose_name='Название'
     )
     worker = models.ForeignKey(
-        Worker, on_delete=models.CASCADE, verbose_name='Работник'
+        Worker, on_delete=models.CASCADE, verbose_name='Работник',
+        related_name='sales_point'
     )
 
     def __str__(self):
