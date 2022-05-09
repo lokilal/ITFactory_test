@@ -11,7 +11,7 @@ class WorkerSerializer(serializers.ModelSerializer):
 
 class SalesPointSerializer(serializers.ModelSerializer):
     worker = serializers.PrimaryKeyRelatedField(
-
+        queryset=Worker.objects.all(), required=True
     )
 
     class Meta:
@@ -20,7 +20,9 @@ class SalesPointSerializer(serializers.ModelSerializer):
 
 
 class VisitingSerializer(serializers.ModelSerializer):
-    sales_point = serializers.PrimaryKeyRelatedField()
+    sales_point = serializers.PrimaryKeyRelatedField(
+        queryset=SalesPoint.objects.all()
+    )
 
     class Meta:
         model = Visiting
