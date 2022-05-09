@@ -29,10 +29,11 @@ class SalesPoint(models.Model):
 
 class Visiting(models.Model):
     date = models.DateTimeField(
-        verbose_name='Дата/время'
+        verbose_name='Дата/время', auto_now_add=True
     )
     sales_point = models.ForeignKey(
-        SalesPoint, on_delete=models.CASCADE, verbose_name='Торговая точка'
+        SalesPoint, on_delete=models.CASCADE, verbose_name='Торговая точка',
+        related_name='visiting'
     )
     latitude = models.FloatField(
         verbose_name='Широта'
