@@ -1,4 +1,4 @@
-from rest_framework.viewsets import ViewSet, ModelViewSet
+from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import get_object_or_404
@@ -20,7 +20,7 @@ class WorkerFilterViewSet(ViewSet):
         return Response(SalesPointSerializer(sales_point, many=True).data)
 
 
-class VisitingViewSet(ModelViewSet):
+class VisitingViewSet(ViewSet):
     queryset = Visiting.objects.all()
     serializer_class = VisitingSerializer
 
