@@ -9,7 +9,7 @@ class WorkerAdmin(admin.ModelAdmin):
 
 
 class SalesPointAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'title', 'worker')
+    list_display = ('pk', 'title',)
     search_fields = ('title', )
 
 

@@ -22,8 +22,8 @@ class SalesPoint(models.Model):
     title = models.CharField(
         max_length=255, verbose_name='Название'
     )
-    worker = models.ForeignKey(
-        Worker, on_delete=models.CASCADE, verbose_name='Работник',
+    worker = models.ManyToManyField(
+        Worker, verbose_name='Работник',
         related_name='sales_point'
     )
 
