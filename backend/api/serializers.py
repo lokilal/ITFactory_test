@@ -1,9 +1,10 @@
 from rest_framework import serializers
 
-from .models import Worker, SalesPoint, Visiting
+from .models import Worker, SalesPoint
 
 
 class WorkerSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Worker
         fields = '__all__'
@@ -11,19 +12,15 @@ class WorkerSerializer(serializers.ModelSerializer):
 
 class SalesPointSerializer(serializers.ModelSerializer):
     worker = serializers.PrimaryKeyRelatedField(
-        queryset=Worker.objects.all(), required=True
+        queryset=Worker.objects.all()
     )
 
     class Meta:
         model = SalesPoint
         fields = '__all__'
 
-
-class VisitingSerializer(serializers.ModelSerializer):
-    sales_point = serializers.PrimaryKeyRelatedField(
-        queryset=SalesPoint.objects.all()
-    )
-
-    class Meta:
-        model = Visiting
-        fields = '__all__'
+    def to_representation(self, instance):
+        data = super(SalesPointSerializer, self).to_representation(instance)
+        obj = Worker.objects.get(pk=data['worker'])
+        data['worker'] = WorkerSerializer(obj).data
+        return data

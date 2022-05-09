@@ -9,14 +9,20 @@ class Worker(models.Model):
         max_length=255, verbose_name='Номер телефона'
     )
 
+    def __str__(self):
+        return f'{self.name} - {self.phone_number}'
+
 
 class SalesPoint(models.Model):
-    name = models.CharField(
+    title = models.CharField(
         max_length=255, verbose_name='Название'
     )
     worker = models.ForeignKey(
         Worker, on_delete=models.CASCADE, verbose_name='Работник'
     )
+
+    def __str__(self):
+        return self.title
 
 
 class Visiting(models.Model):
